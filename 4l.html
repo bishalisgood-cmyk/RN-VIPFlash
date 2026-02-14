@@ -1,0 +1,162 @@
+ <!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<title> ?RN-VIP </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
+
+  body, html { height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
+  iframe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 1; }
+  
+  #ui { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none; }
+
+  /* High-End Neon RGB */
+  @keyframes neonGlow {
+    0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000, inset 0 0 5px #ff0000; }
+    50% { border-color: #00ff88; box-shadow: 0 0 20px #00ff88, inset 0 0 10px #00ff88; }
+    100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000, inset 0 0 5px #ff0000; }
+  }
+
+  .mini-box {
+    pointer-events: auto; position: fixed; width: 140px; 
+    background: rgba(0, 0, 0, 0.98);
+    border: 2px solid #ff0000;
+    text-align: center; padding: 12px;
+    border-radius: 20px; 
+    animation: neonGlow 3s infinite linear;
+    display: none; touch-action: none;
+    font-family: 'Orbitron', sans-serif;
+    backdrop-filter: blur(15px);
+  }
+
+  /* Compact Minimize */
+  .minimized { height: 30px !important; width: 110px !important; padding: 0 !important; border-radius: 10px; overflow: hidden; }
+  .minimized * { display: none !important; }
+  .minimized::after {
+    content: "● VIP ON"; display: block; color: #00ff88;
+    line-height: 30px; font-size: 11px; font-weight: 900;
+  }
+
+  .live-time { font-size: 11px; color: #ff3333; margin-bottom: 6px; font-weight: 900; letter-spacing: 1.5px; }
+  .bot-head { font-size: 13px; color: #fff; margin-bottom: 8px; text-shadow: 0 0 8px #00ff88; }
+  .p-info { font-size: 9px; color: #00ffff; margin-bottom: 2px; }
+  .timer { font-size: 18px; color: #ffeb3b; font-weight: 900; margin-bottom: 5px; }
+  #sig { font-size: 24px; font-weight: 900; margin: 8px 0; text-shadow: 0 0 15px currentColor; }
+  
+  .result-row { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+  .num-main { 
+    background: #111; border-radius: 8px; width: 45px; height: 45px;
+    line-height: 45px; color: #00ff88; font-size: 22px; font-weight: 900; border: 2px solid #333;
+  }
+  .num-opp { 
+    background: #111; border-radius: 50%; width: 45px; height: 45px;
+    line-height: 45px; color: #ff00ff; font-size: 22px; font-weight: 900; border: 2px solid #ff00ff;
+    box-shadow: 0 0 10px rgba(255,0,255,0.3);
+  }
+
+  input { width: 85%; font-size: 14px; padding: 8px; background: #000; border: 2px solid #ff0000; color: #fff; margin-bottom: 12px; border-radius: 8px; text-align: center; outline: none; }
+  button { width: 95%; font-size: 12px; padding: 10px; background: linear-gradient(45deg, #ff0000, #b30000); color: #fff; font-weight: 900; border: none; border-radius: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<iframe src="https://amarclub.net/#/register?invitationCode=271541030252"></iframe>
+
+<div id="ui">
+  <div id="loginBox" class="mini-box" style="display: block; top: 40%; left: 50%; transform: translateX(-50%);">
+    <div class="bot-head">?RN_RABBI⚘™ LOGIN</div>
+    <input id="pass" type="password" placeholder="Enter Key">
+    <button onclick="doLogin()">ACTIVATE VIP AI</button>
+  </div>
+
+  <div id="modBox" class="mini-box" style="top: 15%; left: 15px;" ondblclick="toggleMin()">
+    <div id="liveClock" class="live-time">00:00:00</div>
+    <div class="bot-head">RABBI PRO AI</div>
+    <div class="p-info" id="p_id">ID: ----</div>
+    <div id="tm" class="timer">00s</div>
+    <div id="sig">ANALYZING</div>
+    <div class="result-row">
+      <div class="num-main" id="res_sum">?</div>
+      <div class="num-opp" id="res_opp">?</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Password: sakib1
+const _vK = "4l";
+
+function doLogin() {
+    if(document.getElementById("pass").value === _vK) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("modBox").style.display = "block";
+    }
+}
+
+function toggleMin() {
+    document.getElementById("modBox").classList.toggle("minimized");
+}
+
+function runAI() {
+    const now = new Date();
+    // লাইভ ঘড়ি আপডেট
+    document.getElementById("liveClock").innerText = now.toLocaleTimeString('en-GB');
+
+    const s = now.getSeconds();
+    const rem = 30 - (s % 30);
+    document.getElementById("tm").innerText = rem + "s";
+
+    // পিরিয়ড জেনারেশন
+    const ist = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (5.5 * 3600000));
+    const pNo = Math.floor(((ist.getHours() * 3600 + ist.getMinutes() * 60 + ist.getSeconds()) - (5.5 * 3600)) / 30) + 1;
+    const fullP = "100005" + String(pNo).padStart(4, '0');
+    document.getElementById("p_id").innerText = "PERIOD: " + fullP.slice(-4);
+
+    // মার্কেট কানেক্টেড ক্যালকুলেশন (প্রতি ৩০ সেকেন্ডে একবার)
+    if (rem === 29) {
+        // লজিক: প্রথম সংখ্যা (Top) + শেষ সংখ্যা (Bottom) + মিলি-সেকেন্ড সিড
+        const topNum = parseInt(fullP[0]);
+        const botNum = parseInt(fullP.slice(-1));
+        const seed = now.getMilliseconds() % 10;
+        
+        // শক্তিশালী গাণিতিক সূত্র (Loss Minimizer)
+        let mainNum = (topNum + botNum + seed + 3) % 10;
+        let oppNum = (9 - mainNum);
+
+        document.getElementById("res_sum").innerText = mainNum;
+        document.getElementById("res_opp").innerText = oppNum;
+
+        const sigEl = document.getElementById("sig");
+        const isBig = (mainNum >= 5);
+        sigEl.innerText = isBig ? "BIGG$" : "SMALL€";
+        sigEl.style.color = isBig ? "#00ff88" : "#00ffff";
+    }
+}
+
+setInterval(runAI, 1000);
+
+// Dragging Control (Fixed for Buttons)
+function makeDrag(el) {
+    let x=0, y=0, d=false;
+    el.addEventListener('mousedown', s); el.addEventListener('touchstart', s);
+    function s(e) {
+        if(e.target.tagName==='INPUT' || e.target.tagName==='BUTTON') return;
+        d=true; let t=e.touches ? e.touches[0] : e;
+        x=t.clientX - el.offsetLeft; y=t.clientY - el.offsetTop;
+    }
+    document.addEventListener('mousemove', m); document.addEventListener('touchmove', m, {passive: false});
+    function m(e) {
+        if(!d) return; let t=e.touches ? e.touches[0] : e;
+        el.style.left=(t.clientX - x) + 'px'; el.style.top=(t.clientY - y) + 'px';
+        if(e.type === 'touchmove') e.preventDefault();
+    }
+    document.addEventListener('mouseup', () => d=false); document.addEventListener('touchend', () => d=false);
+}
+makeDrag(document.getElementById("loginBox"));
+makeDrag(document.getElementById("modBox"));
+</script>
+
+</body>
+</html>
